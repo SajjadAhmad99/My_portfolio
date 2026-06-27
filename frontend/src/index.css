@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  
+  body {
+    @apply bg-primary-black text-text-primary font-sans antialiased;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0A0A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #FF2D2D44;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FF2D2D88;
+  }
+}
+
+@layer components {
+  /* Glass Card Effect */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Primary Button — mobile-first sizing */
+  .btn-primary {
+    @apply px-5 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 bg-accent-red text-white 
+           rounded-lg font-semibold text-sm sm:text-base
+           transition-all duration-300 hover:bg-accent-red-hover 
+           hover:shadow-red-glow active:scale-95;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Secondary Button */
+  .btn-secondary {
+    @apply px-5 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 bg-white/10 text-white 
+           rounded-lg font-semibold text-sm sm:text-base
+           backdrop-blur-sm border border-white/20 transition-all duration-300
+           hover:bg-white/20;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Outline Button */
+  .btn-outline {
+    @apply px-5 py-3 sm:px-6 sm:py-3.5 md:px-8 md:py-4 border-2 border-accent-red 
+           text-accent-red rounded-lg font-semibold text-sm sm:text-base
+           transition-all duration-300 hover:bg-accent-red hover:text-white;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Section Container — responsive padding */
+  .section-container {
+    @apply container mx-auto py-12 sm:py-16 md:py-20;
+  }
+  
+  /* Section Title — fluid responsive typography */
+  .section-title {
+    @apply text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-center;
+  }
+  
+  /* Section Subtitle */
+  .section-subtitle {
+    @apply text-base sm:text-lg md:text-xl text-text-secondary text-center 
+           mb-8 sm:mb-10 md:mb-12 max-w-2xl mx-auto px-2;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-red to-accent-red-hover 
+           bg-clip-text text-transparent;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   Circular Profile Image System
+   Mobile-first responsive approach
+   ═══════════════════════════════════════════════════ */
+
+.circular-profile-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.circular-profile-wrapper.about-profile {
+  width: 200px;
+  height: 200px;
+}
+
+.circular-profile-border {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(
+    135deg,
+    #FF2D2D 0%,
+    rgba(255, 45, 45, 0.6) 25%,
+    rgba(255, 77, 77, 0.3) 50%,
+    rgba(255, 45, 45, 0.6) 75%,
+    #FF2D2D 100%
+  );
+  position: relative;
+  z-index: 10;
+  box-shadow:
+    0 0 20px rgba(255, 45, 45, 0.15),
+    0 0 40px rgba(255, 45, 45, 0.08),
+    inset 0 0 15px rgba(255, 45, 45, 0.08);
+}
+
+.circular-profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #0A0A0A;
+  border: 3px solid #0A0A0A;
+}
+
+.circular-profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  border-radius: 50%;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.circular-profile-image.about-image img {
+  object-position: center 10%;
+}
+
+.circular-profile-wrapper:hover .circular-profile-image img {
+  transform: scale(1.05);
+}
+
+/* ═══════════════════════════════════════════════════
+   Responsive breakpoints for circular profile
+   ═══════════════════════════════════════════════════ */
+
+/* xs: 475px+ */
+@media (min-width: 475px) {
+  .circular-profile-wrapper {
+    width: 260px;
+    height: 260px;
+  }
+  .circular-profile-wrapper.about-profile {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+/* sm: 640px+ */
+@media (min-width: 640px) {
+  .circular-profile-wrapper {
+    width: 280px;
+    height: 280px;
+  }
+  .circular-profile-wrapper.about-profile {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+/* md: 768px+ */
+@media (min-width: 768px) {
+  .circular-profile-wrapper {
+    width: 300px;
+    height: 300px;
+  }
+  .circular-profile-wrapper.about-profile {
+    width: 280px;
+    height: 280px;
+  }
+  .circular-profile-border {
+    padding: 4px;
+    box-shadow:
+      0 0 30px rgba(255, 45, 45, 0.2),
+      0 0 60px rgba(255, 45, 45, 0.1),
+      inset 0 0 20px rgba(255, 45, 45, 0.1);
+  }
+}
+
+/* lg: 1024px+ */
+@media (min-width: 1024px) {
+  .circular-profile-wrapper {
+    width: 340px;
+    height: 340px;
+  }
+  .circular-profile-wrapper.about-profile {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* xl: 1280px+ */
+@media (min-width: 1280px) {
+  .circular-profile-wrapper {
+    width: 380px;
+    height: 380px;
+  }
+  .circular-profile-wrapper.about-profile {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   Touch-friendly improvements for mobile
+   ═══════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  /* Hide orbit decorations on small screens to prevent overflow */
+  .orbit-decoration {
+    display: none;
+  }
+  
+  /* Ensure scrollbar is minimal on mobile */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   Safe area support for notched devices
+   ═══════════════════════════════════════════════════ */
+@supports (padding: env(safe-area-inset-bottom)) {
+  footer {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+  
+  nav {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}

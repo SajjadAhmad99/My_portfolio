@@ -1,0 +1,25 @@
+.venv
+backend/__pycache__
+frontend/__pycache__
+
+backend/.venv
+frontend/.venv
+backend/venv
+frontend/venv
+
+backend/.env
+frontend/.env
+
+.env
+backend/portfiolo.db
+
+# node modules
+node_modules/
+
+
+181-Sajjad Ahmad.jpeg
+resume (3).pdf
+profile.jfif
+
+README.md
+information.txt
