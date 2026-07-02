@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api';
-
+// Use relative URLs so Vite's proxy handles routing in development
+// and the same paths work in production behind a reverse proxy.
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: '/api',
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000, // 10 second timeout
 });
 
 export const projectsAPI = {

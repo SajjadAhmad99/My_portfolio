@@ -113,7 +113,7 @@ const Hero = () => {
                 <div className="circular-profile-image">
                   <img
                     src="/images/profile-hero.jpg"
-                    alt="Sajjad Ahmad - AI & ML Engineer"
+                    alt="Sajjad Ahmad - AI Engineer"
                   />
                 </div>
               </div>
@@ -156,7 +156,7 @@ const Hero = () => {
             </motion.p>
 
             <h1 className="text-4xl xs:text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
-              AI & ML{' '}
+              AI{' '}
               <span className="text-gradient">
                 Engineer
               </span>
@@ -202,7 +202,7 @@ const Hero = () => {
                 </motion.button>
               </Link>
 
-              <a href="/resume.pdf" download="Sajjad_Ahmad_Resume.pdf">
+              <a href="/api/resume/download" download="Sajjad_Ahmad.pdf">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

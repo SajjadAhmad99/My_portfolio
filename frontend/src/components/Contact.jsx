@@ -19,7 +19,21 @@ const Contact = () => {
       setStatus({ type: 'success', message: response.data.message });
       setFormData({ fullname: '', email: '', subject: '', message: '' });
     } catch (error) {
-      setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+      let errorMsg = 'Failed to send message. Please try again.';
+      if (error.response?.data?.detail) {
+        const detail = error.response.data.detail;
+        if (Array.isArray(detail)) {
+          // Pydantic validation errors
+          errorMsg = detail.map(err => err.msg?.replace('Value error, ', '') || err.msg).join('. ');
+        } else if (typeof detail === 'string') {
+          errorMsg = detail;
+        }
+      } else if (error.code === 'ECONNABORTED') {
+        errorMsg = 'Request timed out. Please check your connection and try again.';
+      } else if (!error.response) {
+        errorMsg = 'Unable to reach the server. Please make sure the backend is running.';
+      }
+      setStatus({ type: 'error', message: errorMsg });
     } finally {
       setLoading(false);
     }
