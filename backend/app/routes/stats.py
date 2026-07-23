@@ -11,8 +11,8 @@ async def get_statistics(db: Session = Depends(get_db)):
     project_count = db.query(Project).count()
     
     return {
-        "projects_completed": max(project_count, 120),
-        "years_experience": 5,
-        "happy_clients": 50,
+        "projects_completed": max(project_count, 5),
+        "years_experience": 1,
+        "happy_clients": 10,
         "satisfaction_rate": 99
     }

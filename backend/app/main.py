@@ -32,9 +32,11 @@ app.include_router(projects.router)
 app.include_router(contact.router)
 app.include_router(stats.router)
 
-# Resume file path — looks in backend directory then frontend public
+# Resume file paths
 RESUME_PATHS = [
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "Resume.pdf"),
     os.path.join(os.path.dirname(os.path.dirname(__file__)), "Sajjad_Ahmad.pdf"),
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "public", "Resume.pdf"),
     os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "public", "Sajjad_Ahmad.pdf"),
 ]
 
@@ -53,10 +55,10 @@ async def download_resume():
     if resume_path:
         return FileResponse(
             path=resume_path,
-            filename="Sajjad_Ahmad.pdf",
+            filename="Resume.pdf",
             media_type="application/pdf",
             headers={
-                "Content-Disposition": "attachment; filename=Sajjad_Ahmad.pdf"
+                "Content-Disposition": "attachment; filename=Resume.pdf"
             }
         )
     return {"error": "Resume file not found"}, 404

@@ -42,6 +42,30 @@ def seed_projects():
             "demo_url": None,
             "image_url": "/images/projects/rag-system.png"
         },
+        {
+            "title": "Smart Vision – AI Web App",
+            "description": "AI-powered web application featuring real-time image processing with object detection (YOLO), text extraction (OCR), and Vision Language Models. Handles multiple image uploads with optimized inference for low-latency results.",
+            "technologies": json.dumps(["Python", "FastAPI", "YOLO", "OpenCV", "EasyOCR", "JavaScript"]),
+            "github_url": "https://github.com/SajjadAhmad99",
+            "demo_url": None,
+            "image_url": "/images/projects/smart-vision.png"
+        },
+        {
+            "title": "AI Face Attendance System",
+            "description": "Intelligent face attendance system with fast, accurate face recognition using InsightFace and ONNX Runtime. Prevents duplicate entries, handles varying poses and lighting, and records attendance in real time.",
+            "technologies": json.dumps(["Python", "InsightFace", "OpenCV", "ONNX Runtime", "Streamlit", "SQLite"]),
+            "github_url": "https://github.com/SajjadAhmad99",
+            "demo_url": None,
+            "image_url": "/images/projects/face-attendance.png"
+        },
+        {
+            "title": "Customer Churn Prediction",
+            "description": "Machine learning system that predicts customer churn using Scikit-learn and XGBoost. Features data preprocessing, feature engineering, model comparison, and an interactive Streamlit dashboard for data-driven retention strategies.",
+            "technologies": json.dumps(["Python", "Scikit-learn", "XGBoost", "Pandas", "Plotly", "Streamlit"]),
+            "github_url": "https://github.com/SajjadAhmad99",
+            "demo_url": None,
+            "image_url": "/images/projects/churn-prediction.png"
+        },
     ]
     
     for project_data in projects:

@@ -4,9 +4,9 @@ import { statsAPI } from '../services/api';
 
 const About = () => {
   const [stats, setStats] = useState({
-    projects_completed: 120,
-    years_experience: 5,
-    happy_clients: 50,
+    projects_completed: 5,
+    years_experience: 1,
+    happy_clients: 10,
     satisfaction_rate: 99,
   });
 

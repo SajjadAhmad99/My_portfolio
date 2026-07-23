@@ -12,26 +12,39 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData.fullname.trim().length < 2) {
+      setStatus({ type: 'error', message: 'Full Name must be at least 2 characters long.' });
+      return;
+    }
+    if (formData.message.trim().length < 10) {
+      setStatus({ type: 'error', message: 'Message must be at least 10 characters long.' });
+      return;
+    }
+
     setLoading(true);
     setStatus({ type: '', message: '' });
     try {
       const response = await contactAPI.submit(formData);
-      setStatus({ type: 'success', message: response.data.message });
+      setStatus({ type: 'success', message: response.data?.message || "Thank you! Your message has been received. I'll get back to you soon." });
       setFormData({ fullname: '', email: '', subject: '', message: '' });
     } catch (error) {
       let errorMsg = 'Failed to send message. Please try again.';
       if (error.response?.data?.detail) {
         const detail = error.response.data.detail;
         if (Array.isArray(detail)) {
-          // Pydantic validation errors
           errorMsg = detail.map(err => err.msg?.replace('Value error, ', '') || err.msg).join('. ');
         } else if (typeof detail === 'string') {
           errorMsg = detail;
         }
-      } else if (error.code === 'ECONNABORTED') {
-        errorMsg = 'Request timed out. Please check your connection and try again.';
       } else if (!error.response) {
-        errorMsg = 'Unable to reach the server. Please make sure the backend is running.';
+        // Mailto fallback if backend server is unreachable
+        const mailtoUrl = `mailto:sajjaduop181@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`From: ${formData.fullname} (${formData.email})\n\n${formData.message}`)}`;
+        window.location.href = mailtoUrl;
+        setStatus({ type: 'success', message: "Your message has been opened in your email client to send to sajjaduop181@gmail.com!" });
+        setFormData({ fullname: '', email: '', subject: '', message: '' });
+        setLoading(false);
+        return;
       }
       setStatus({ type: 'error', message: errorMsg });
     } finally {
