@@ -34,6 +34,12 @@ app.include_router(stats.router)
 
 # Resume file paths
 RESUME_PATHS = [
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "SajjadAhmad-cv.pdf"),
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "SajjadAhmad-cv.pdf"),
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "public", "SajjadAhmad-cv.pdf"),
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "Sajjad_Ahmad_CV.pdf"),
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "Sajjad_Ahmad_CV.pdf"),
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "public", "Sajjad_Ahmad_CV.pdf"),
     os.path.join(os.path.dirname(os.path.dirname(__file__)), "Resume.pdf"),
     os.path.join(os.path.dirname(os.path.dirname(__file__)), "Sajjad_Ahmad.pdf"),
     os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "public", "Resume.pdf"),
@@ -53,12 +59,13 @@ async def download_resume():
     """Download resume as PDF file."""
     resume_path = find_resume()
     if resume_path:
+        filename = os.path.basename(resume_path)
         return FileResponse(
             path=resume_path,
-            filename="Resume.pdf",
+            filename=filename,
             media_type="application/pdf",
             headers={
-                "Content-Disposition": "attachment; filename=Resume.pdf"
+                "Content-Disposition": f"attachment; filename={filename}"
             }
         )
     return {"error": "Resume file not found"}, 404
