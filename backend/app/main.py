@@ -32,18 +32,20 @@ app.include_router(projects.router)
 app.include_router(contact.router)
 app.include_router(stats.router)
 
+# Root directory of the portfolio project (two levels up from this file)
+PORTFOLIO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "..")
+)
+
 # Resume file paths
 RESUME_PATHS = [
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "SajjadAhmad-cv.pdf"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "SajjadAhmad-cv.pdf"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "public", "SajjadAhmad-cv.pdf"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "Sajjad_Ahmad_CV.pdf"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "Sajjad_Ahmad_CV.pdf"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "public", "Sajjad_Ahmad_CV.pdf"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "Resume.pdf"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "Sajjad_Ahmad.pdf"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "public", "Resume.pdf"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend", "public", "Sajjad_Ahmad.pdf"),
+    os.path.join(PORTFOLIO_ROOT, "SajjadAhmad-cv.pdf"),
+    os.path.join(PORTFOLIO_ROOT, "Sajjad_Ahmad_CV.pdf"),
+    os.path.join(PORTFOLIO_ROOT, "backend", "SajjadAhmad-cv.pdf"),
+    os.path.join(PORTFOLIO_ROOT, "backend", "Resume.pdf"),
+    os.path.join(PORTFOLIO_ROOT, "backend", "Sajjad_Ahmad.pdf"),
+    os.path.join(PORTFOLIO_ROOT, "frontend", "public", "SajjadAhmad-cv.pdf"),
+    os.path.join(PORTFOLIO_ROOT, "frontend", "public", "Resume.pdf"),
 ]
 
 def find_resume():
@@ -70,16 +72,27 @@ async def download_resume():
         )
     return {"error": "Resume file not found"}, 404
 
-@app.get("/")
-async def root():
-    """Root endpoint"""
-    return {
-        "message": "Portfolio API",
-        "version": "1.0.0",
-        "status": "active"
-    }
+@app.get("/presentation")
+async def serve_presentation():
+    """Serve the Frontend.html presentation page."""
+    html_path = os.path.join(PORTFOLIO_ROOT, "Frontend.html")
+    return FileResponse(html_path, media_type="text/html")
 
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
+
+@app.get("/")
+async def root():
+    """Root endpoint — redirects info to presentation"""
+    return {
+        "message": "Portfolio API",
+        "version": "1.0.0",
+        "status": "active",
+        "presentation": "http://localhost:8000/presentation"
+    }
+
+# Mount portfolio root as static files so images/assets load in the presentation
+# This MUST come after all @app.get() routes
+app.mount("/static", StaticFiles(directory=PORTFOLIO_ROOT), name="static")
