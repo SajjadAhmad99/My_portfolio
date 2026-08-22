@@ -27,3 +27,10 @@ requirements.txt
 
 backend/requirements.txt
 
+
+.env
+backend/.env
+.venv/
+node_modules/
+frontend/node_modules/
+__pycache__/
