@@ -34,3 +34,28 @@ backend/.env
 node_modules/
 frontend/node_modules/
 __pycache__/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Environment
+.env
+*.env
+
+# Node
+node_modules/
+frontend/node_modules/
+
+# Vite
+frontend/dist/
+dist/
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Vercel
+.vercel/

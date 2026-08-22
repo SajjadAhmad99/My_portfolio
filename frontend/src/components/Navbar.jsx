@@ -83,6 +83,15 @@ const Navbar = () => {
 
             {/* CTA Button + Mobile Toggle */}
             <div className="flex items-center gap-3 sm:gap-4">
+              <a href="/Frontend.html" target="_blank" rel="noopener noreferrer">
+                <motion.button 
+                  className="btn-secondary !py-2.5 !px-3 sm:!py-3 sm:!px-4 !text-xs sm:!text-sm hidden lg:block cursor-pointer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  📊 Slide Deck
+                </motion.button>
+              </a>
               <Link to="contact" smooth={true} duration={500} offset={-80}>
                 <motion.button 
                   className="btn-primary !py-2.5 !px-4 sm:!py-3 sm:!px-6 !text-xs sm:!text-sm hidden lg:block"
@@ -143,9 +152,13 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: navItems.length * 0.08 }}
+                className="flex gap-3"
               >
+                <a href="/Frontend.html" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>
+                  <button className="btn-secondary !py-2.5 !px-5 text-sm">📊 Slide Deck</button>
+                </a>
                 <Link to="contact" smooth={true} duration={500} offset={-80} onClick={() => setMobileOpen(false)}>
-                  <button className="btn-primary !py-3 !px-8 mt-4">Hire Me</button>
+                  <button className="btn-primary !py-2.5 !px-5 text-sm">Hire Me</button>
                 </Link>
               </motion.li>
             </ul>

@@ -13,23 +13,58 @@ router = APIRouter(prefix="/api/projects", tags=["projects"])
 async def get_all_projects(db: Session = Depends(get_db)):
     """Get all projects"""
     projects = db.query(Project).all()
-    
-    # Parse technologies JSON string
-    for project in projects:
-        project.technologies = json.loads(project.technologies)
-    
-    return projects
+    result = []
+    for p in projects:
+        techs = p.technologies
+        if isinstance(techs, str):
+            try:
+                techs = json.loads(techs)
+            except Exception:
+                techs = [t.strip() for t in techs.split(",") if t.strip()]
+        if not isinstance(techs, list):
+            techs = []
+        result.append(
+            ProjectResponse(
+                id=p.id,
+                title=p.title,
+                description=p.description,
+                technologies=techs,
+                github_url=p.github_url,
+                demo_url=p.demo_url,
+                image_url=p.image_url,
+                created_at=p.created_at
+            )
+        )
+    return result
 
 @router.get("/{project_id}", response_model=ProjectResponse)
 async def get_project(project_id: int, db: Session = Depends(get_db)):
     """Get single project by ID"""
-    project = db.query(Project).filter(Project.id == project_id).first()
+    p = db.query(Project).filter(Project.id == project_id).first()
     
-    if not project:
+    if not p:
         raise HTTPException(status_code=404, detail="Project not found")
     
-    project.technologies = json.loads(project.technologies)
-    return project
+    techs = p.technologies
+    if isinstance(techs, str):
+        try:
+            techs = json.loads(techs)
+        except Exception:
+            techs = [t.strip() for t in techs.split(",") if t.strip()]
+    if not isinstance(techs, list):
+        techs = []
+        
+    return ProjectResponse(
+        id=p.id,
+        title=p.title,
+        description=p.description,
+        technologies=techs,
+        github_url=p.github_url,
+        demo_url=p.demo_url,
+        image_url=p.image_url,
+        created_at=p.created_at
+    )
+
 
 @router.post("/", response_model=ProjectResponse)
 async def create_project(project: ProjectCreate, db: Session = Depends(get_db)):

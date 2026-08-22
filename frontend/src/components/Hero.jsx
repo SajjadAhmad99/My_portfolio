@@ -112,8 +112,12 @@ const Hero = () => {
                 {/* The circular image */}
                 <div className="circular-profile-image">
                   <img
-                    src="/images/profile-hero.jpg"
+                    src="/sajjad_profile.jpeg"
                     alt="Sajjad Ahmad - AI Engineer"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/images/profile-hero.jpg";
+                    }}
                   />
                 </div>
               </div>

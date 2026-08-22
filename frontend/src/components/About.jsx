@@ -152,8 +152,12 @@ const About = () => {
             <div className="circular-profile-border">
               <div className="circular-profile-image about-image">
                 <img
-                  src="/images/profile-about.jpg"
+                  src="/sajjad_profile.jpeg"
                   alt="Sajjad Ahmad"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/images/profile-about.jpg";
+                  }}
                 />
               </div>
             </div>
