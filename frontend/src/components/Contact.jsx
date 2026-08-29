@@ -54,7 +54,7 @@ const Contact = () => {
 
   const contactInfo = [
     { icon: FaEnvelope, title: 'Email', content: 'sajjaduop181@gmail.com', href: 'mailto:sajjaduop181@gmail.com' },
-    { icon: FaPhone, title: 'Phone', content: '+92-333-4874072', href: 'tel:+923334874072' },
+    { icon: FaPhone, title: 'Phone', content: '+92-333-4874073', href: 'tel:+923334874073' },
     { icon: FaMapMarkerAlt, title: 'Location', content: 'Peshawar, Khyber Pakhtunkhwa, Pakistan' },
     { icon: FaClock, title: 'Availability', content: 'Mon - Fri, 9AM - 6PM PKT' },
   ];

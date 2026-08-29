@@ -246,16 +246,6 @@ const Hero = () => {
                 Live Agent Demo
               </button>
 
-              <a href="/SajjadAhmad-cv.pdf" download="SajjadAhmad-cv.pdf" target="_blank" rel="noopener noreferrer">
-                <motion.button
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="btn-outline cursor-pointer"
-                  id="hero-download-resume"
-                >
-                  Download Resume
-                </motion.button>
-              </a>
             </div>
 
             {/* Social Links */}

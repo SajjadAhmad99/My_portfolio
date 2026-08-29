@@ -471,7 +471,7 @@
 
             <!-- Logo / Profile -->
             <a href="#slide1" class="nav-logo" id="navLogoLink">
-                <img src="/static/sajjad_profile.jpeg" alt="Sajjad Ahmad" class="nav-logo-avatar" onerror="this.src='/static/profile.jfif'">
+                <img src="/sajjad_profile.jpeg" alt="Sajjad Ahmad" class="nav-logo-avatar" onerror="if (this.src.indexOf('/static/')===-1) this.src='/static/sajjad_profile.jpeg'; else this.src='/profile.jfif';">
                 <div class="nav-logo-text">
                     <span class="name">Sajjad Ahmad</span>
                     <span class="role">● Open to Hire</span>
@@ -541,7 +541,7 @@
                     <span class="tag" class="tag">AI ENGINEERING EXCELLENCE</span>
                 </div>
                 <div style="margin-bottom: 25px;">
-                    <img src="/static/sajjad_profile.jpeg" alt="Sajjad Ahmad" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: var(--shadow); margin: 0 auto;" onerror="this.src='/static/profile.jfif'">
+                    <img src="/sajjad_profile.jpeg" alt="Sajjad Ahmad" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: var(--shadow); margin: 0 auto;" onerror="if (this.src.indexOf('/static/')===-1) this.src='/static/sajjad_profile.jpeg'; else this.src='/profile.jfif';">
                 </div>
                 <h1 style="font-size: clamp(38px, 6vw, 60px); color: var(--text-primary); margin-bottom: 15px; letter-spacing: -1px;">Sajjad Ahmad</h1>
                 <p style="font-size: clamp(16px, 2vw, 22px); color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-bottom: 20px;">AI Engineer | Generative AI | Agentic AI | Computer Vision</p>
@@ -592,7 +592,7 @@
                                 </div>
                             </div>
                             <div style="background: var(--bg-card-sub); border: 2px dashed rgba(99,102,241,0.2); border-radius: 16px; padding: 30px; text-align: center;">
-                                <img src="/static/sajjad_profile.jpeg" alt="Sajjad Ahmad" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin: 0 auto 15px auto;" onerror="this.src='/static/profile.jfif'">
+                                <img src="/sajjad_profile.jpeg" alt="Sajjad Ahmad" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin: 0 auto 15px auto;" onerror="if (this.src.indexOf('/static/')===-1) this.src='/static/sajjad_profile.jpeg'; else this.src='/profile.jfif';">
                                 <h4 style="font-size: 20px; margin-bottom: 5px; color: var(--text-primary);">Sajjad Ahmad</h4>
                                 <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">Professional AI Systems Builder</p>
                                 <div style="border-top: 1px solid rgba(99,102,241,0.1); padding-top: 15px; display: flex; justify-content: space-around; text-align: center;">
@@ -1075,10 +1075,6 @@
                     <a href="mailto:sajjaduop181@gmail.com" class="social-icon-btn">
                         <i class="fa-solid fa-envelope" style="color:var(--accent);font-size:18px;margin-bottom:4px;display:block;"></i>
                         <span style="font-size:11px;font-weight:600;">Email Me</span>
-                    </a>
-                    <a href="http://localhost:8000/api/resume/download" id="resumeDownloadBtn" target="_blank" class="social-icon-btn">
-                        <i class="fa-solid fa-file-pdf" style="color:var(--accent);font-size:18px;margin-bottom:4px;display:block;"></i>
-                        <span style="font-size:11px;font-weight:600;">Download CV</span>
                     </a>
                     <a href="tel:+923334874073" class="social-icon-btn" id="phoneContactBtn">
                         <i class="fa-solid fa-phone" style="color:var(--accent);font-size:18px;margin-bottom:4px;display:block;"></i>
