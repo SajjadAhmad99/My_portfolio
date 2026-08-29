@@ -112,16 +112,197 @@
             transform: translateY(-2px);
         }
         .profile-avatar-sm {
-            width: 32px; height: 32px; border-radius: 50%; object-fit: cover;
+            width: 34px; height: 34px; border-radius: 50%; object-fit: cover;
             border: 2px solid var(--accent);
+            box-shadow: 0 0 12px var(--accent-light);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .profile-info-sm .name {
-            font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px;
-            color: var(--text-primary); line-height: 1.1;
+        .profile-badge-nav:hover .profile-avatar-sm {
+            transform: scale(1.18) rotate(6deg);
+            box-shadow: 0 0 18px var(--accent);
         }
-        .profile-info-sm .status {
-            font-family: 'JetBrains Mono', monospace; font-size: 9px;
-            color: var(--accent); font-weight: 600;
+
+        /* AESTHETIC HIGH-TECH PROFILE FRAME & ANIMATIONS */
+        .profile-hero-wrapper {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 25px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        .profile-hero-wrapper.sm-wrapper {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 15px auto;
+        }
+
+        .radar-pulse-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, rgba(6, 182, 212, 0.15) 50%, transparent 75%);
+            animation: radarPulse 3.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .radar-pulse-ring.delay-pulse {
+            animation-delay: 1.9s;
+        }
+
+        .orbit-ring-outer {
+            position: absolute;
+            inset: -14px;
+            border-radius: 50%;
+            border: 2px dashed rgba(59, 130, 246, 0.5);
+            animation: rotateClockwise 16s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .sm-wrapper .orbit-ring-outer { inset: -10px; }
+
+        .orbit-spark-node {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: #38bdf8;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #38bdf8, 0 0 18px #2563eb;
+            transform: translateX(-50%);
+        }
+
+        .orbit-ring-inner {
+            position: absolute;
+            inset: -7px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #06b6d4;
+            border-bottom-color: #8b5cf6;
+            animation: rotateCounterClockwise 10s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .sm-wrapper .orbit-ring-inner { inset: -5px; }
+
+        .profile-hero-frame {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, #2563eb 0%, #06b6d4 50%, #8b5cf6 100%);
+            box-shadow: 
+                0 0 35px rgba(37, 99, 235, 0.45),
+                0 0 70px rgba(139, 92, 246, 0.25),
+                inset 0 0 15px rgba(255, 255, 255, 0.3);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 2;
+        }
+        .sm-wrapper .profile-hero-frame {
+            width: 105px;
+            height: 105px;
+            padding: 4px;
+        }
+
+        .profile-hero-frame:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 
+                0 0 50px rgba(37, 99, 235, 0.75),
+                0 0 90px rgba(139, 92, 246, 0.5),
+                inset 0 0 25px rgba(255, 255, 255, 0.5);
+        }
+
+        .profile-hero-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .profile-hero-frame:hover .profile-hero-img {
+            transform: scale(1.1);
+            filter: brightness(1.08) contrast(1.05);
+        }
+
+        .profile-hero-frame::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -70%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.65),
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: metallicSheen 4.5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .profile-status-badge {
+            position: absolute;
+            bottom: -2px;
+            right: 0px;
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 30px;
+            padding: 3px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+            z-index: 10;
+        }
+        .status-dot-pulse {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: statusPulse 2s infinite ease-in-out;
+        }
+        .status-badge-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            color: #f8fafc;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes metallicSheen {
+            0% { left: -80%; opacity: 0; }
+            20% { opacity: 0.85; }
+            45% { left: 150%; opacity: 0; }
+            100% { left: 150%; opacity: 0; }
+        }
+        @keyframes radarPulse {
+            0% { transform: scale(0.9); opacity: 0.85; }
+            50% { transform: scale(1.4); opacity: 0; }
+            100% { transform: scale(0.9); opacity: 0; }
+        }
+        @keyframes rotateClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes rotateCounterClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        @keyframes statusPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.4; }
         }
 
         /* MASTER PRESENTATION WRAPPER - SLIGHTLY SMALLER */
@@ -290,22 +471,249 @@
         }
         .pipeline-arrow { color: var(--accent); font-size: 12px; font-weight: bold; }
 
-        /* NAV DOTS */
-        .slide-nav-dots {
-            position: fixed; left: 12px; top: 50%; transform: translateY(-50%); z-index: 1000;
-            display: flex; flex-direction: column; gap: 8px;
-            background: var(--nav-bg); backdrop-filter: blur(16px);
-            padding: 10px 6px; border-radius: 24px;
+        /* ============================================
+           PREMIUM STICKY NAVBAR
+        ============================================ */
+        .main-navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 2000;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(22px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .main-navbar.scrolled {
+            box-shadow: 0 6px 40px rgba(37,99,235,0.12);
+        }
+
+        /* Brand / Logo area */
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .navbar-brand:hover .nav-avatar {
+            transform: scale(1.12) rotate(5deg);
+            box-shadow: 0 0 18px var(--accent);
+        }
+        .nav-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2.5px solid var(--accent);
+            box-shadow: 0 0 12px rgba(37,99,235,0.35);
+            transition: transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.35s ease;
+        }
+        .navbar-brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        .navbar-brand-name {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+        }
+        .navbar-brand-role {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0.6px;
+        }
+
+        /* Nav links */
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex: 1;
+            justify-content: center;
+        }
+        .navbar-links li a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.22s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+        .navbar-links li a i {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+        .navbar-links li a:hover {
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+        .navbar-links li a.active {
+            color: var(--accent);
+            background: var(--accent-light);
+            font-weight: 600;
+        }
+        .navbar-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 20px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: transform 0.25s ease;
+        }
+        .navbar-links li a.active::after,
+        .navbar-links li a:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Right controls */
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .available-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: rgba(16,185,129,0.1);
+            border: 1px solid rgba(16,185,129,0.35);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            color: #10b981;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+        }
+        .available-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: statusPulse 2s infinite ease-in-out;
+        }
+        .theme-toggle-btn {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
+            color: var(--text-primary);
+            padding: 8px 14px; border-radius: 30px;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+            cursor: pointer; display: flex; align-items: center; gap: 8px;
+            transition: all 0.25s ease;
         }
-        .dot-link {
-            width: 8px; height: 8px; border-radius: 50%;
-            background-color: var(--border-color); transition: all 0.3s ease; display: block;
+        .theme-toggle-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-light);
+            transform: translateY(-1px);
         }
-        .dot-link:hover, .dot-link.active {
-            background-color: var(--accent); transform: scale(1.4);
+
+        /* Hamburger */
+        .hamburger-btn {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 38px; height: 38px;
+            border-radius: 8px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.25s ease;
         }
+        .hamburger-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Mobile overlay nav */
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            top: 68px; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1900;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .mobile-nav-overlay.open {
+            opacity: 1;
+        }
+        .mobile-nav-panel {
+            position: absolute;
+            top: 0; right: 0;
+            width: 280px; height: 100%;
+            background: var(--bg-container);
+            border-left: 1px solid var(--border-color);
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+        }
+        .mobile-nav-overlay.open .mobile-nav-panel {
+            transform: translateX(0);
+        }
+        .mobile-nav-panel a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .mobile-nav-panel a:hover,
+        .mobile-nav-panel a.active {
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+        .mobile-nav-panel a i {
+            width: 18px;
+            text-align: center;
+            color: var(--accent);
+        }
+        .mobile-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 8px 0;
+        }
+
+        /* Offset main content for fixed navbar */
+        body { padding-top: 68px; }
 
         /* Form inputs theme */
         input, textarea, select {
@@ -348,7 +756,13 @@
             box-shadow: var(--shadow-hover);
         }
 
-        @media (max-width: 1200px) { .slide-nav-dots { display: none; } }
+        @media (max-width: 1200px) { }
+        @media (max-width: 900px) {
+            .navbar-links { display: none; }
+            .available-badge { display: none; }
+            .hamburger-btn { display: flex; }
+            .mobile-nav-overlay { display: block; }
+        }
         @media (max-width: 768px) {
             .presentation-wrapper { padding: 10px; }
             .slide-container { padding: 20px; min-height: auto; }
@@ -360,28 +774,64 @@
 </head>
 <body>
 
-    <div class="top-controls">
-        <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-            <i class="fa-solid fa-moon" id="themeIcon"></i>
-            <span id="themeText">Dark</span>
-        </button>
-        <a href="#slide1" class="profile-badge-nav">
-            <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" class="profile-avatar-sm" onerror="this.src='/static/sajjad_profile.jpeg'">
-            <div class="profile-info-sm">
-                <div class="name">Sajjad Ahmad</div>
-                <div class="status">AI Engineer</div>
+    <!-- ============ PREMIUM STICKY NAVBAR ============ -->
+    <nav class="main-navbar" id="mainNavbar">
+        <!-- Brand -->
+        <a href="#slide1" class="navbar-brand">
+            <img
+                src="sajjad_profile.jpeg"
+                alt="Sajjad Ahmad"
+                class="nav-avatar"
+                onerror="this.src='/static/sajjad_profile.jpeg'; this.onerror=null;"
+            >
+            <div class="navbar-brand-text">
+                <span class="navbar-brand-name">Sajjad Ahmad</span>
+                <span class="navbar-brand-role">AI ENGINEER</span>
             </div>
         </a>
-    </div>
 
-    <div class="slide-nav-dots">
-        <a href="#slide1" class="dot-link active" title="Slide 1"></a>
-        <a href="#interactive-carousel" class="dot-link" title="Interactive Slides Carousel"></a>
-        <a href="#slide10" class="dot-link" title="Projects"></a>
-        <a href="#slide11" class="dot-link" title="Approach"></a>
-        <a href="#slide12" class="dot-link" title="Production"></a>
-        <a href="#slide13" class="dot-link" title="Why Me"></a>
-        <a href="#slide15" class="dot-link" title="Contact"></a>
+        <!-- Desktop Nav Links -->
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="#slide1" id="nav-home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#interactive-carousel" id="nav-about" class="nav-link"><i class="fa-solid fa-user"></i> About</a></li>
+            <li><a href="#c-slide3" id="nav-skills" class="nav-link"><i class="fa-solid fa-layer-group"></i> Skills</a></li>
+            <li><a href="#slide10" id="nav-projects" class="nav-link"><i class="fa-solid fa-rocket"></i> Projects</a></li>
+            <li><a href="#slide11" id="nav-approach" class="nav-link"><i class="fa-solid fa-diagram-project"></i> Approach</a></li>
+            <li><a href="#slide12" id="nav-production" class="nav-link"><i class="fa-solid fa-server"></i> Production</a></li>
+            <li><a href="#slide15" id="nav-contact" class="nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a></li>
+        </ul>
+
+        <!-- Right side controls -->
+        <div class="navbar-right">
+            <div class="available-badge">
+                <div class="available-dot"></div>
+                OPEN TO HIRE
+            </div>
+            <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+                <span id="themeText">Dark</span>
+            </button>
+            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileNav()" title="Menu">
+                <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile nav overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()">
+        <div class="mobile-nav-panel" onclick="event.stopPropagation()">
+            <a href="#slide1" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#interactive-carousel" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-user"></i> About</a>
+            <a href="#c-slide3" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-layer-group"></i> Skills</a>
+            <a href="#slide10" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-rocket"></i> Projects</a>
+            <a href="#slide11" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-diagram-project"></i> Approach</a>
+            <a href="#slide12" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-server"></i> Production</a>
+            <a href="#slide15" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+            <div class="mobile-divider"></div>
+            <a href="https://www.linkedin.com/in/sajjad-ahmad-275166278/" target="_blank" onclick="closeMobileNav()"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/SajjadAhmad99" target="_blank" onclick="closeMobileNav()"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="mailto:sajjaduop181@gmail.com" onclick="closeMobileNav()"><i class="fa-solid fa-envelope"></i> Email</a>
+        </div>
     </div>
 
     <div class="presentation-wrapper">
@@ -392,8 +842,20 @@
                 <div style="margin-bottom: 20px;">
                     <span class="tag" class="tag">AI ENGINEERING EXCELLENCE</span>
                 </div>
-                <div style="margin-bottom: 25px;">
-                    <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: var(--shadow); margin: 0 auto;" onerror="this.src='/static/sajjad_profile.jpeg'">
+                <div class="profile-hero-wrapper">
+                    <div class="radar-pulse-ring"></div>
+                    <div class="radar-pulse-ring delay-pulse"></div>
+                    <div class="orbit-ring-outer">
+                        <div class="orbit-spark-node"></div>
+                    </div>
+                    <div class="orbit-ring-inner"></div>
+                    <div class="profile-hero-frame">
+                        <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" class="profile-hero-img" onerror="this.src='/static/sajjad_profile.jpeg'">
+                    </div>
+                    <div class="profile-status-badge">
+                        <div class="status-dot-pulse"></div>
+                        <span class="status-badge-text">AI ENGINEER</span>
+                    </div>
                 </div>
                 <h1 style="font-size: clamp(38px, 6vw, 60px); color: var(--text-primary); margin-bottom: 15px; letter-spacing: -1px;">Sajjad Ahmad</h1>
                 <p style="font-size: clamp(16px, 2vw, 22px); color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-bottom: 20px;">AI Engineer | Generative AI | Agentic AI | Computer Vision</p>
@@ -443,8 +905,17 @@
                                     <span class="tag">RAG Systems</span>
                                 </div>
                             </div>
-                            <div style="background: var(--bg-card-sub); border: 2px dashed rgba(99,102,241,0.2); border-radius: 16px; padding: 30px; text-align: center;">
-                                <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin: 0 auto 15px auto;" onerror="this.src='/static/sajjad_profile.jpeg'">
+                            <div style="background: var(--bg-card-sub); border: 2px dashed rgba(99,102,241,0.2); border-radius: 16px; padding: 25px 20px; text-align: center;">
+                                <div class="profile-hero-wrapper sm-wrapper">
+                                    <div class="radar-pulse-ring"></div>
+                                    <div class="orbit-ring-outer">
+                                        <div class="orbit-spark-node"></div>
+                                    </div>
+                                    <div class="orbit-ring-inner"></div>
+                                    <div class="profile-hero-frame">
+                                        <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" class="profile-hero-img" onerror="this.src='/static/sajjad_profile.jpeg'">
+                                    </div>
+                                </div>
                                 <h4 style="font-size: 20px; margin-bottom: 5px; color: var(--text-primary);">Sajjad Ahmad</h4>
                                 <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">Professional AI Systems Builder</p>
                                 <div style="border-top: 1px solid rgba(99,102,241,0.1); padding-top: 15px; display: flex; justify-content: space-around; text-align: center;">
@@ -1009,6 +1480,74 @@
         } else {
             setTheme('light');
         }
+
+        // =============================================
+        // MOBILE NAV
+        // =============================================
+        function toggleMobileNav() {
+            const overlay = document.getElementById('mobileNavOverlay');
+            const icon = document.getElementById('hamburgerIcon');
+            const isOpen = overlay.classList.contains('open');
+            if (isOpen) {
+                closeMobileNav();
+            } else {
+                overlay.classList.add('open');
+                icon.className = 'fa-solid fa-xmark';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        function closeMobileNav() {
+            const overlay = document.getElementById('mobileNavOverlay');
+            const icon = document.getElementById('hamburgerIcon');
+            overlay.classList.remove('open');
+            icon.className = 'fa-solid fa-bars';
+            document.body.style.overflow = '';
+        }
+
+        // =============================================
+        // NAVBAR SCROLL SHADOW
+        // =============================================
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('mainNavbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // =============================================
+        // ACTIVE NAV LINK TRACKING (IntersectionObserver)
+        // =============================================
+        const navSectionMap = [
+            { sectionId: 'slide1',              navId: 'nav-home'       },
+            { sectionId: 'interactive-carousel', navId: 'nav-about'     },
+            { sectionId: 'c-slide3',            navId: 'nav-skills'     },
+            { sectionId: 'slide10',             navId: 'nav-projects'   },
+            { sectionId: 'slide11',             navId: 'nav-approach'   },
+            { sectionId: 'slide12',             navId: 'nav-production' },
+            { sectionId: 'slide15',             navId: 'nav-contact'    },
+        ];
+
+        function setActiveNavLink(navId) {
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            const el = document.getElementById(navId);
+            if (el) el.classList.add('active');
+        }
+
+        const navLinkObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const map = navSectionMap.find(m => m.sectionId === entry.target.id);
+                    if (map) setActiveNavLink(map.navId);
+                }
+            });
+        }, { threshold: 0.25, rootMargin: '-60px 0px -60px 0px' });
+
+        navSectionMap.forEach(({ sectionId }) => {
+            const el = document.getElementById(sectionId);
+            if (el) navLinkObserver.observe(el);
+        });
 
         // =============================================
         // HORIZONTAL CAROUSEL

@@ -129,13 +129,17 @@ async def serve_presentation():
 
 @app.get("/")
 async def root():
-    """Root endpoint — serves the primary frontend build or Frontend.html."""
-    dist_index = os.path.join(FRONTEND_DIST, "index.html")
-    if os.path.isfile(dist_index):
-        return FileResponse(dist_index, media_type="text/html")
+    """Root endpoint — serves frontend/index.html (main portfolio) first."""
+    # Prefer frontend/index.html as the primary portfolio page
+    frontend_index = os.path.join(PORTFOLIO_ROOT, "frontend", "index.html")
+    if os.path.isfile(frontend_index):
+        return FileResponse(frontend_index, media_type="text/html")
     html_path = find_frontend_html()
     if html_path:
         return FileResponse(html_path, media_type="text/html")
+    dist_index = os.path.join(FRONTEND_DIST, "index.html")
+    if os.path.isfile(dist_index):
+        return FileResponse(dist_index, media_type="text/html")
     return {
         "message": "Portfolio API",
         "version": "1.0.0",

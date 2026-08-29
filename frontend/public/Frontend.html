@@ -112,16 +112,197 @@
             transform: translateY(-2px);
         }
         .profile-avatar-sm {
-            width: 32px; height: 32px; border-radius: 50%; object-fit: cover;
+            width: 34px; height: 34px; border-radius: 50%; object-fit: cover;
             border: 2px solid var(--accent);
+            box-shadow: 0 0 12px var(--accent-light);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .profile-info-sm .name {
-            font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px;
-            color: var(--text-primary); line-height: 1.1;
+        .profile-badge-nav:hover .profile-avatar-sm {
+            transform: scale(1.18) rotate(6deg);
+            box-shadow: 0 0 18px var(--accent);
         }
-        .profile-info-sm .status {
-            font-family: 'JetBrains Mono', monospace; font-size: 9px;
-            color: var(--accent); font-weight: 600;
+
+        /* AESTHETIC HIGH-TECH PROFILE FRAME & ANIMATIONS */
+        .profile-hero-wrapper {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 25px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        .profile-hero-wrapper.sm-wrapper {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 15px auto;
+        }
+
+        .radar-pulse-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, rgba(6, 182, 212, 0.15) 50%, transparent 75%);
+            animation: radarPulse 3.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .radar-pulse-ring.delay-pulse {
+            animation-delay: 1.9s;
+        }
+
+        .orbit-ring-outer {
+            position: absolute;
+            inset: -14px;
+            border-radius: 50%;
+            border: 2px dashed rgba(59, 130, 246, 0.5);
+            animation: rotateClockwise 16s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .sm-wrapper .orbit-ring-outer { inset: -10px; }
+
+        .orbit-spark-node {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: #38bdf8;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #38bdf8, 0 0 18px #2563eb;
+            transform: translateX(-50%);
+        }
+
+        .orbit-ring-inner {
+            position: absolute;
+            inset: -7px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #06b6d4;
+            border-bottom-color: #8b5cf6;
+            animation: rotateCounterClockwise 10s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .sm-wrapper .orbit-ring-inner { inset: -5px; }
+
+        .profile-hero-frame {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, #2563eb 0%, #06b6d4 50%, #8b5cf6 100%);
+            box-shadow: 
+                0 0 35px rgba(37, 99, 235, 0.45),
+                0 0 70px rgba(139, 92, 246, 0.25),
+                inset 0 0 15px rgba(255, 255, 255, 0.3);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 2;
+        }
+        .sm-wrapper .profile-hero-frame {
+            width: 105px;
+            height: 105px;
+            padding: 4px;
+        }
+
+        .profile-hero-frame:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 
+                0 0 50px rgba(37, 99, 235, 0.75),
+                0 0 90px rgba(139, 92, 246, 0.5),
+                inset 0 0 25px rgba(255, 255, 255, 0.5);
+        }
+
+        .profile-hero-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .profile-hero-frame:hover .profile-hero-img {
+            transform: scale(1.1);
+            filter: brightness(1.08) contrast(1.05);
+        }
+
+        .profile-hero-frame::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -70%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.65),
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: metallicSheen 4.5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .profile-status-badge {
+            position: absolute;
+            bottom: -2px;
+            right: 0px;
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 30px;
+            padding: 3px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+            z-index: 10;
+        }
+        .status-dot-pulse {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: statusPulse 2s infinite ease-in-out;
+        }
+        .status-badge-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            color: #f8fafc;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes metallicSheen {
+            0% { left: -80%; opacity: 0; }
+            20% { opacity: 0.85; }
+            45% { left: 150%; opacity: 0; }
+            100% { left: 150%; opacity: 0; }
+        }
+        @keyframes radarPulse {
+            0% { transform: scale(0.9); opacity: 0.85; }
+            50% { transform: scale(1.4); opacity: 0; }
+            100% { transform: scale(0.9); opacity: 0; }
+        }
+        @keyframes rotateClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes rotateCounterClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        @keyframes statusPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.4; }
         }
 
         /* MASTER PRESENTATION WRAPPER - SLIGHTLY SMALLER */
@@ -392,8 +573,20 @@
                 <div style="margin-bottom: 20px;">
                     <span class="tag" class="tag">AI ENGINEERING EXCELLENCE</span>
                 </div>
-                <div style="margin-bottom: 25px;">
-                    <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: var(--shadow); margin: 0 auto;" onerror="this.src='/static/sajjad_profile.jpeg'">
+                <div class="profile-hero-wrapper">
+                    <div class="radar-pulse-ring"></div>
+                    <div class="radar-pulse-ring delay-pulse"></div>
+                    <div class="orbit-ring-outer">
+                        <div class="orbit-spark-node"></div>
+                    </div>
+                    <div class="orbit-ring-inner"></div>
+                    <div class="profile-hero-frame">
+                        <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" class="profile-hero-img" onerror="this.src='/static/sajjad_profile.jpeg'">
+                    </div>
+                    <div class="profile-status-badge">
+                        <div class="status-dot-pulse"></div>
+                        <span class="status-badge-text">AI ENGINEER</span>
+                    </div>
                 </div>
                 <h1 style="font-size: clamp(38px, 6vw, 60px); color: var(--text-primary); margin-bottom: 15px; letter-spacing: -1px;">Sajjad Ahmad</h1>
                 <p style="font-size: clamp(16px, 2vw, 22px); color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-bottom: 20px;">AI Engineer | Generative AI | Agentic AI | Computer Vision</p>
@@ -443,8 +636,17 @@
                                     <span class="tag">RAG Systems</span>
                                 </div>
                             </div>
-                            <div style="background: var(--bg-card-sub); border: 2px dashed rgba(99,102,241,0.2); border-radius: 16px; padding: 30px; text-align: center;">
-                                <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin: 0 auto 15px auto;" onerror="this.src='/static/sajjad_profile.jpeg'">
+                            <div style="background: var(--bg-card-sub); border: 2px dashed rgba(99,102,241,0.2); border-radius: 16px; padding: 25px 20px; text-align: center;">
+                                <div class="profile-hero-wrapper sm-wrapper">
+                                    <div class="radar-pulse-ring"></div>
+                                    <div class="orbit-ring-outer">
+                                        <div class="orbit-spark-node"></div>
+                                    </div>
+                                    <div class="orbit-ring-inner"></div>
+                                    <div class="profile-hero-frame">
+                                        <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" class="profile-hero-img" onerror="this.src='/static/sajjad_profile.jpeg'">
+                                    </div>
+                                </div>
                                 <h4 style="font-size: 20px; margin-bottom: 5px; color: var(--text-primary);">Sajjad Ahmad</h4>
                                 <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">Professional AI Systems Builder</p>
                                 <div style="border-top: 1px solid rgba(99,102,241,0.1); padding-top: 15px; display: flex; justify-content: space-around; text-align: center;">

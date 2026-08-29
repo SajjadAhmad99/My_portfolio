@@ -75,53 +75,153 @@
             pointer-events: none;
         }
 
-        /* TOP-RIGHT CONTROLS BAR */
-        .top-controls {
-            position: fixed; top: 16px; right: 20px; z-index: 1000;
+        /* ========================
+           PREMIUM STICKY NAV BAR
+           ======================== */
+        .main-navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .navbar-inner {
+            max-width: 1200px; margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        /* Logo / Profile Badge */
+        .nav-logo {
             display: flex; align-items: center; gap: 10px;
+            text-decoration: none; flex-shrink: 0;
+        }
+        .nav-logo:hover .nav-logo-avatar { transform: scale(1.05); }
+        .nav-logo-avatar {
+            width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+            border: 2px solid var(--accent);
+            transition: transform 0.25s ease;
+        }
+        .nav-logo-text .name {
+            font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px;
+            color: var(--text-primary); line-height: 1.1; display: block;
+        }
+        .nav-logo-text .role {
+            font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            color: var(--accent); font-weight: 600; display: block;
+        }
+
+        /* Nav links */
+        .nav-links {
+            display: flex; align-items: center; gap: 4px;
+            list-style: none;
+        }
+        .nav-links li a {
+            display: block; padding: 7px 16px;
+            font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .nav-links li a:hover {
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+        .nav-links li a.active {
+            color: var(--accent);
+            background: var(--accent-light);
+            font-weight: 600;
+        }
+
+        /* "More" dropdown */
+        .nav-more-wrapper { position: relative; }
+        .nav-dropdown {
+            display: none;
+            position: absolute; top: calc(100% + 8px); right: 0;
+            background: var(--bg-container);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 6px;
+            min-width: 180px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            z-index: 999;
+            animation: fadeInUp 0.2s ease;
+        }
+        .nav-more-wrapper:hover .nav-dropdown,
+        .nav-more-wrapper:focus-within .nav-dropdown { display: block; }
+        .nav-dropdown a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 9px 14px; border-radius: 8px;
+            font-size: 13px; font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .nav-dropdown a i { color: var(--accent); width: 16px; text-align: center; }
+        .nav-dropdown a:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        /* Nav right actions */
+        .nav-actions {
+            display: flex; align-items: center; gap: 8px;
         }
 
         .theme-toggle-btn {
-            background: var(--nav-bg);
-            backdrop-filter: blur(16px);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 8px 14px; border-radius: 30px;
+            padding: 7px 14px; border-radius: 30px;
             font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
-            cursor: pointer; display: flex; align-items: center; gap: 8px;
+            cursor: pointer; display: flex; align-items: center; gap: 7px;
             box-shadow: var(--shadow);
+            transition: all 0.2s ease;
         }
         .theme-toggle-btn:hover {
             border-color: var(--accent);
             color: var(--accent);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
-        .profile-badge-nav {
+        /* Hamburger for mobile */
+        .nav-hamburger {
+            display: none;
+            background: none; border: none;
+            color: var(--text-primary); font-size: 20px;
+            cursor: pointer; padding: 6px;
+            border-radius: 8px;
+            transition: color 0.2s;
+        }
+        .nav-hamburger:hover { color: var(--accent); }
+
+        /* Mobile menu */
+        .nav-mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+            padding: 12px 16px 16px;
+            border-top: 1px solid var(--border-color);
             background: var(--nav-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            padding: 4px 14px 4px 4px;
-            display: flex; align-items: center; gap: 8px;
-            box-shadow: var(--shadow);
+        }
+        .nav-mobile-menu.open { display: flex; }
+        .nav-mobile-menu a {
+            padding: 10px 14px; border-radius: 8px;
+            font-size: 14px; font-weight: 500;
+            color: var(--text-secondary);
             text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            transition: all 0.2s;
         }
-        .profile-badge-nav:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        .profile-avatar-sm {
-            width: 32px; height: 32px; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--accent);
-        }
-        .profile-info-sm .name {
-            font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px;
-            color: var(--text-primary); line-height: 1.1;
-        }
-        .profile-info-sm .status {
-            font-family: 'JetBrains Mono', monospace; font-size: 9px;
-            color: var(--accent); font-weight: 600;
+        .nav-mobile-menu a i { color: var(--accent); width: 16px; text-align: center; }
+        .nav-mobile-menu a:hover, .nav-mobile-menu a.active {
+            color: var(--accent); background: var(--accent-light);
         }
 
         /* MASTER PRESENTATION WRAPPER - SLIGHTLY SMALLER */
@@ -144,7 +244,7 @@
             justify-content: flex-start; overflow: hidden;
             padding: 30px 40px;
             position: relative; width: 100%; margin: 0 auto;
-            scroll-margin-top: 25px;
+            scroll-margin-top: 80px;
             animation: fadeInUp 0.5s ease-out;
         }
         .slide-container:hover { border-color: var(--accent-border); }
@@ -167,7 +267,7 @@
             padding: 25px 20px 20px 20px;
             position: relative; overflow: hidden;
             box-shadow: var(--shadow);
-            scroll-margin-top: 25px;
+            scroll-margin-top: 80px;
         }
         
         /* MASTER SLIDES DECK HEADER - SMALLER */
@@ -355,24 +455,72 @@
             .pipeline-arrow { display: none; }
             .pipeline-flow { flex-direction: column; }
             .pipeline-step { width: 100%; }
+            .nav-links, .nav-actions .theme-toggle-btn { display: none; }
+            .nav-hamburger { display: block; }
+        }
+        @media (min-width: 769px) {
+            .nav-mobile-menu { display: none !important; }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-controls">
-        <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-            <i class="fa-solid fa-moon" id="themeIcon"></i>
-            <span id="themeText">Dark</span>
-        </button>
-        <a href="#slide1" class="profile-badge-nav">
-            <img src="/static/sajjad_profile.jpeg" alt="Sajjad Ahmad" class="profile-avatar-sm" onerror="this.src='/static/profile.jfif'">
-            <div class="profile-info-sm">
-                <div class="name">Sajjad Ahmad</div>
-                <div class="status">AI Engineer</div>
+    <!-- ======================== PREMIUM NAV BAR ======================== -->
+    <nav class="main-navbar" id="mainNavbar">
+        <div class="navbar-inner">
+
+            <!-- Logo / Profile -->
+            <a href="#slide1" class="nav-logo" id="navLogoLink">
+                <img src="/static/sajjad_profile.jpeg" alt="Sajjad Ahmad" class="nav-logo-avatar" onerror="this.src='/static/profile.jfif'">
+                <div class="nav-logo-text">
+                    <span class="name">Sajjad Ahmad</span>
+                    <span class="role">● Open to Hire</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <ul class="nav-links" id="desktopNavLinks">
+                <li><a href="#slide1" class="nav-link active" data-section="slide1" id="navHome">Home</a></li>
+                <li><a href="#slide10" class="nav-link" data-section="slide10" id="navAbout">About</a></li>
+                <li><a href="#slide15" class="nav-link" data-section="slide15" id="navContact">Contact</a></li>
+                <li class="nav-more-wrapper">
+                    <a href="#" class="nav-link" onclick="return false;">More <i class="fa-solid fa-chevron-down" style="font-size:10px;margin-left:3px;"></i></a>
+                    <div class="nav-dropdown">
+                        <a href="#interactive-carousel" id="ddSkills"><i class="fa-solid fa-code"></i> Skills & Stack</a>
+                        <a href="#slide10" id="ddProjects"><i class="fa-solid fa-diagram-project"></i> Projects</a>
+                        <a href="#slide11" id="ddApproach"><i class="fa-solid fa-lightbulb"></i> My Approach</a>
+                        <a href="#slide12" id="ddProduction"><i class="fa-solid fa-server"></i> Production</a>
+                        <a href="#slide13" id="ddWhyMe"><i class="fa-solid fa-star"></i> Why Work With Me</a>
+                        <a href="https://github.com/SajjadAhmad99" target="_blank" id="ddGithub"><i class="fa-brands fa-github"></i> GitHub</a>
+                        <a href="https://www.linkedin.com/in/sajjad-ahmad-275166278/" target="_blank" id="ddLinkedin"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Right Actions -->
+            <div class="nav-actions">
+                <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <span id="themeText">Dark</span>
+                </button>
+                <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileMenu()" title="Menu">
+                    <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+                </button>
             </div>
-        </a>
-    </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div class="nav-mobile-menu" id="mobileMenu">
+            <a href="#slide1" class="nav-link" onclick="closeMobileMenu()"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#slide10" class="nav-link" onclick="closeMobileMenu()"><i class="fa-solid fa-user"></i> About</a>
+            <a href="#slide15" class="nav-link" onclick="closeMobileMenu()"><i class="fa-solid fa-envelope"></i> Contact</a>
+            <a href="#interactive-carousel" class="nav-link" onclick="closeMobileMenu()"><i class="fa-solid fa-code"></i> Skills & Stack</a>
+            <a href="#slide11" class="nav-link" onclick="closeMobileMenu()"><i class="fa-solid fa-lightbulb"></i> My Approach</a>
+            <a href="#slide13" class="nav-link" onclick="closeMobileMenu()"><i class="fa-solid fa-star"></i> Why Work With Me</a>
+            <a href="https://github.com/SajjadAhmad99" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/sajjad-ahmad-275166278/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        </div>
+    </nav>
 
     <div class="slide-nav-dots">
         <a href="#slide1" class="dot-link active" title="Slide 1"></a>
@@ -384,7 +532,7 @@
         <a href="#slide15" class="dot-link" title="Contact"></a>
     </div>
 
-    <div class="presentation-wrapper">
+    <div class="presentation-wrapper" style="padding-top: 84px;">
 
         <!-- SLIDE 1: HERO / INTRODUCTION -->
         <div class="slide-container" id="slide1" style="justify-content: center; text-align: center;">
@@ -932,9 +1080,9 @@
                         <i class="fa-solid fa-file-pdf" style="color:var(--accent);font-size:18px;margin-bottom:4px;display:block;"></i>
                         <span style="font-size:11px;font-weight:600;">Download CV</span>
                     </a>
-                    <a href="https://x.com/FahhamG8078" target="_blank" class="social-icon-btn">
-                        <i class="fa-brands fa-x-twitter" style="color:var(--accent);font-size:18px;margin-bottom:4px;display:block;"></i>
-                        <span style="font-size:11px;font-weight:600;">Twitter / X</span>
+                    <a href="tel:+923334874073" class="social-icon-btn" id="phoneContactBtn">
+                        <i class="fa-solid fa-phone" style="color:var(--accent);font-size:18px;margin-bottom:4px;display:block;"></i>
+                        <span style="font-size:11px;font-weight:600;">0333-4874073</span>
                     </a>
                 </div>
 
@@ -1009,6 +1157,54 @@
         } else {
             setTheme('light');
         }
+
+        // =============================================
+        // MOBILE MENU TOGGLE
+        // =============================================
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('hamburgerIcon');
+            const isOpen = menu.classList.toggle('open');
+            icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('hamburgerIcon').className = 'fa-solid fa-bars';
+        }
+
+        // =============================================
+        // ACTIVE NAV LINK TRACKING (IntersectionObserver)
+        // =============================================
+        const navSectionMap = [
+            { sectionId: 'slide1',              linkId: 'navHome' },
+            { sectionId: 'interactive-carousel', linkId: 'navAbout' },
+            { sectionId: 'slide10',             linkId: 'navAbout' },
+            { sectionId: 'slide11',             linkId: 'navAbout' },
+            { sectionId: 'slide12',             linkId: 'navAbout' },
+            { sectionId: 'slide13',             linkId: 'navAbout' },
+            { sectionId: 'slide15',             linkId: 'navContact' },
+        ];
+
+        const allNavLinks = document.querySelectorAll('#desktopNavLinks .nav-link');
+        function setActiveNavLink(linkId) {
+            allNavLinks.forEach(l => l.classList.remove('active'));
+            const el = document.getElementById(linkId);
+            if (el) el.classList.add('active');
+        }
+
+        const navActiveObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const map = navSectionMap.find(m => m.sectionId === entry.target.id);
+                    if (map) setActiveNavLink(map.linkId);
+                }
+            });
+        }, { threshold: 0.3, rootMargin: '-64px 0px 0px 0px' });
+
+        navSectionMap.forEach(m => {
+            const el = document.getElementById(m.sectionId);
+            if (el) navActiveObserver.observe(el);
+        });
 
         // =============================================
         // HORIZONTAL CAROUSEL

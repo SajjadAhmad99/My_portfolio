@@ -1,3 +1,4 @@
+import ParticleCanvas from './components/ParticleCanvas';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -8,7 +9,8 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App relative bg-primary-black min-h-screen text-text-primary overflow-x-hidden selection:bg-accent-red selection:text-white">
+      <ParticleCanvas />
       <Navbar />
       <Hero />
       <About />
@@ -21,3 +23,4 @@ function App() {
 }
 
 export default App;
+
