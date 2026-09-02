@@ -471,249 +471,22 @@
         }
         .pipeline-arrow { color: var(--accent); font-size: 12px; font-weight: bold; }
 
-        /* ============================================
-           PREMIUM STICKY NAVBAR
-        ============================================ */
-        .main-navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 2000;
-            height: 68px;
-            display: flex;
-            align-items: center;
-            padding: 0 32px;
-            background: var(--nav-bg);
-            backdrop-filter: blur(22px) saturate(180%);
-            -webkit-backdrop-filter: blur(22px) saturate(180%);
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .main-navbar.scrolled {
-            box-shadow: 0 6px 40px rgba(37,99,235,0.12);
-        }
-
-        /* Brand / Logo area */
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-        .navbar-brand:hover .nav-avatar {
-            transform: scale(1.12) rotate(5deg);
-            box-shadow: 0 0 18px var(--accent);
-        }
-        .nav-avatar {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2.5px solid var(--accent);
-            box-shadow: 0 0 12px rgba(37,99,235,0.35);
-            transition: transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.35s ease;
-        }
-        .navbar-brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-        .navbar-brand-name {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 16px;
-            color: var(--text-primary);
-            letter-spacing: -0.3px;
-        }
-        .navbar-brand-role {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            font-weight: 500;
-            color: var(--accent);
-            letter-spacing: 0.6px;
-        }
-
-        /* Nav links */
-        .navbar-links {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            flex: 1;
-            justify-content: center;
-        }
-        .navbar-links li a {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 7px 14px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 13.5px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.22s ease;
-            position: relative;
-            white-space: nowrap;
-        }
-        .navbar-links li a i {
-            font-size: 12px;
-            opacity: 0.7;
-        }
-        .navbar-links li a:hover {
-            color: var(--accent);
-            background: var(--accent-light);
-        }
-        .navbar-links li a.active {
-            color: var(--accent);
-            background: var(--accent-light);
-            font-weight: 600;
-        }
-        .navbar-links li a::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 20px;
-            height: 2px;
-            background: var(--accent);
-            border-radius: 2px;
-            transition: transform 0.25s ease;
-        }
-        .navbar-links li a.active::after,
-        .navbar-links li a:hover::after {
-            transform: translateX(-50%) scaleX(1);
-        }
-
-        /* Right controls */
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-        .available-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 12px;
-            border-radius: 20px;
-            background: rgba(16,185,129,0.1);
-            border: 1px solid rgba(16,185,129,0.35);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            font-weight: 600;
-            color: #10b981;
-            letter-spacing: 0.4px;
-            white-space: nowrap;
-        }
-        .available-dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: #10b981;
-            animation: statusPulse 2s infinite ease-in-out;
-        }
-        .theme-toggle-btn {
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
+        /* NAV DOTS */
+        .slide-nav-dots {
+            position: fixed; left: 12px; top: 50%; transform: translateY(-50%); z-index: 1000;
+            display: flex; flex-direction: column; gap: 8px;
+            background: var(--nav-bg); backdrop-filter: blur(16px);
+            padding: 10px 6px; border-radius: 24px;
             border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 8px 14px; border-radius: 30px;
-            font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
-            cursor: pointer; display: flex; align-items: center; gap: 8px;
-            transition: all 0.25s ease;
+            box-shadow: var(--shadow);
         }
-        .theme-toggle-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-light);
-            transform: translateY(-1px);
+        .dot-link {
+            width: 8px; height: 8px; border-radius: 50%;
+            background-color: var(--border-color); transition: all 0.3s ease; display: block;
         }
-
-        /* Hamburger */
-        .hamburger-btn {
-            display: none;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            width: 38px; height: 38px;
-            border-radius: 8px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.25s ease;
+        .dot-link:hover, .dot-link.active {
+            background-color: var(--accent); transform: scale(1.4);
         }
-        .hamburger-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* Mobile overlay nav */
-        .mobile-nav-overlay {
-            display: none;
-            position: fixed;
-            top: 68px; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 1900;
-            opacity: 0;
-            transition: opacity 0.25s ease;
-        }
-        .mobile-nav-overlay.open {
-            opacity: 1;
-        }
-        .mobile-nav-panel {
-            position: absolute;
-            top: 0; right: 0;
-            width: 280px; height: 100%;
-            background: var(--bg-container);
-            border-left: 1px solid var(--border-color);
-            padding: 24px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-            box-shadow: -8px 0 40px rgba(0,0,0,0.15);
-        }
-        .mobile-nav-overlay.open .mobile-nav-panel {
-            transform: translateX(0);
-        }
-        .mobile-nav-panel a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 14px;
-            border-radius: 10px;
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .mobile-nav-panel a:hover,
-        .mobile-nav-panel a.active {
-            color: var(--accent);
-            background: var(--accent-light);
-        }
-        .mobile-nav-panel a i {
-            width: 18px;
-            text-align: center;
-            color: var(--accent);
-        }
-        .mobile-divider {
-            height: 1px;
-            background: var(--border-color);
-            margin: 8px 0;
-        }
-
-        /* Offset main content for fixed navbar */
-        body { padding-top: 68px; }
 
         /* Form inputs theme */
         input, textarea, select {
@@ -756,13 +529,7 @@
             box-shadow: var(--shadow-hover);
         }
 
-        @media (max-width: 1200px) { }
-        @media (max-width: 900px) {
-            .navbar-links { display: none; }
-            .available-badge { display: none; }
-            .hamburger-btn { display: flex; }
-            .mobile-nav-overlay { display: block; }
-        }
+        @media (max-width: 1200px) { .slide-nav-dots { display: none; } }
         @media (max-width: 768px) {
             .presentation-wrapper { padding: 10px; }
             .slide-container { padding: 20px; min-height: auto; }
@@ -770,68 +537,419 @@
             .pipeline-flow { flex-direction: column; }
             .pipeline-step { width: 100%; }
         }
+
+        /* ============================================= */
+        /* CHATBOT FLOATING BUTTON & PANEL               */
+        /* ============================================= */
+
+        /* Floating chatbot trigger button */
+        .chatbot-fab {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            color: #ffffff;
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.45), 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .chatbot-fab:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 10px 35px rgba(37, 99, 235, 0.6), 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .chatbot-fab:active {
+            transform: scale(0.95);
+        }
+        .chatbot-fab .fab-icon {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .chatbot-fab.open .fa-comment-dots {
+            display: none;
+        }
+        .chatbot-fab.open .fa-xmark {
+            display: inline-block;
+        }
+        .chatbot-fab:not(.open) .fa-xmark {
+            display: none;
+        }
+
+        /* Pulse ring animation around FAB */
+        .chatbot-fab::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.3), rgba(124, 58, 237, 0.3));
+            animation: chatFabPulse 2.5s infinite ease-in-out;
+            z-index: -1;
+        }
+        .chatbot-fab.open::before {
+            animation: none;
+            opacity: 0;
+        }
+        @keyframes chatFabPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.25); opacity: 0; }
+        }
+
+        /* Chat panel container */
+        .chatbot-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            z-index: 9998;
+            width: 400px;
+            height: 560px;
+            background: var(--bg-container);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(37, 99, 235, 0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .chatbot-panel.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        /* Chat header */
+        .chatbot-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+        .chatbot-header-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .chatbot-header-info {
+            flex: 1;
+        }
+        .chatbot-header-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+        .chatbot-header-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            opacity: 0.85;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chatbot-header-status .online-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 8px #4ade80;
+            animation: statusPulse 2s infinite ease-in-out;
+        }
+        .chatbot-close-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        .chatbot-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Messages area */
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            scroll-behavior: smooth;
+            background: var(--bg-body);
+        }
+        .chatbot-messages::-webkit-scrollbar { width: 5px; }
+        .chatbot-messages::-webkit-scrollbar-track { background: transparent; }
+        .chatbot-messages::-webkit-scrollbar-thumb { background: var(--accent-border); border-radius: 4px; }
+
+        /* Message bubbles */
+        .chat-msg {
+            display: flex;
+            gap: 10px;
+            max-width: 88%;
+            animation: chatMsgIn 0.3s ease-out;
+        }
+        @keyframes chatMsgIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .chat-msg.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        .chat-msg.bot {
+            align-self: flex-start;
+        }
+        .chat-msg-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .chat-msg.bot .chat-msg-avatar {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #ffffff;
+        }
+        .chat-msg.user .chat-msg-avatar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        .chat-msg-bubble {
+            padding: 11px 15px;
+            border-radius: 16px;
+            font-size: 13.5px;
+            line-height: 1.55;
+            font-family: 'Inter', sans-serif;
+            word-wrap: break-word;
+        }
+        .chat-msg.bot .chat-msg-bubble {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            border-bottom-left-radius: 4px;
+        }
+        .chat-msg.user .chat-msg-bubble {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #ffffff;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 10px;
+            max-width: 88%;
+            align-self: flex-start;
+            animation: chatMsgIn 0.3s ease-out;
+        }
+        .typing-dots {
+            padding: 14px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .typing-dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: typingBounce 1.4s infinite ease-in-out;
+        }
+        .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-6px); opacity: 1; }
+        }
+
+        /* Input area */
+        .chatbot-input-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            background: var(--bg-container);
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .chatbot-input {
+            flex: 1;
+            padding: 11px 16px !important;
+            border-radius: 12px !important;
+            font-size: 13.5px !important;
+            font-family: 'Inter', sans-serif !important;
+            resize: none;
+            outline: none !important;
+            min-height: 42px;
+            max-height: 80px;
+            overflow-y: auto;
+        }
+        .chatbot-send-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #ffffff;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        .chatbot-send-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+        .chatbot-send-btn:active {
+            transform: scale(0.95);
+        }
+        .chatbot-send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Welcome message */
+        .chat-welcome {
+            text-align: center;
+            padding: 20px 15px;
+        }
+        .chat-welcome-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(124, 58, 237, 0.12));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin: 0 auto 12px auto;
+            color: var(--accent);
+            border: 1px solid var(--accent-border);
+        }
+        .chat-welcome h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        .chat-welcome p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 14px;
+        }
+        .chat-suggestion-chip {
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            background: var(--accent-light);
+            color: var(--accent);
+            border: 1px solid var(--accent-border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .chat-suggestion-chip:hover {
+            background: var(--accent);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        /* Mobile responsive chatbot */
+        @media (max-width: 500px) {
+            .chatbot-panel {
+                width: calc(100vw - 24px);
+                right: 12px;
+                bottom: 90px;
+                height: calc(100vh - 140px);
+                max-height: 600px;
+                border-radius: 16px;
+            }
+            .chatbot-fab {
+                right: 16px;
+                bottom: 20px;
+                width: 54px;
+                height: 54px;
+                font-size: 22px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ============ PREMIUM STICKY NAVBAR ============ -->
-    <nav class="main-navbar" id="mainNavbar">
-        <!-- Brand -->
-        <a href="#slide1" class="navbar-brand">
-            <img
-                src="sajjad_profile.jpeg"
-                alt="Sajjad Ahmad"
-                class="nav-avatar"
-                onerror="this.src='/static/sajjad_profile.jpeg'; this.onerror=null;"
-            >
-            <div class="navbar-brand-text">
-                <span class="navbar-brand-name">Sajjad Ahmad</span>
-                <span class="navbar-brand-role">AI ENGINEER</span>
+    <div class="top-controls">
+        <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+            <span id="themeText">Dark</span>
+        </button>
+        <a href="#slide1" class="profile-badge-nav">
+            <img src="sajjad_profile.jpeg" alt="Sajjad Ahmad" class="profile-avatar-sm" onerror="this.src='/static/sajjad_profile.jpeg'">
+            <div class="profile-info-sm">
+                <div class="name">Sajjad Ahmad</div>
+                <div class="status">AI Engineer</div>
             </div>
         </a>
+    </div>
 
-        <!-- Desktop Nav Links -->
-        <ul class="navbar-links" id="navLinks">
-            <li><a href="#slide1" id="nav-home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
-            <li><a href="#interactive-carousel" id="nav-about" class="nav-link"><i class="fa-solid fa-user"></i> About</a></li>
-            <li><a href="#c-slide3" id="nav-skills" class="nav-link"><i class="fa-solid fa-layer-group"></i> Skills</a></li>
-            <li><a href="#slide10" id="nav-projects" class="nav-link"><i class="fa-solid fa-rocket"></i> Projects</a></li>
-            <li><a href="#slide11" id="nav-approach" class="nav-link"><i class="fa-solid fa-diagram-project"></i> Approach</a></li>
-            <li><a href="#slide12" id="nav-production" class="nav-link"><i class="fa-solid fa-server"></i> Production</a></li>
-            <li><a href="#slide15" id="nav-contact" class="nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a></li>
-        </ul>
-
-        <!-- Right side controls -->
-        <div class="navbar-right">
-            <div class="available-badge">
-                <div class="available-dot"></div>
-                OPEN TO HIRE
-            </div>
-            <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
-                <span id="themeText">Dark</span>
-            </button>
-            <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileNav()" title="Menu">
-                <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile nav overlay -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()">
-        <div class="mobile-nav-panel" onclick="event.stopPropagation()">
-            <a href="#slide1" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-house"></i> Home</a>
-            <a href="#interactive-carousel" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-user"></i> About</a>
-            <a href="#c-slide3" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-layer-group"></i> Skills</a>
-            <a href="#slide10" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-rocket"></i> Projects</a>
-            <a href="#slide11" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-diagram-project"></i> Approach</a>
-            <a href="#slide12" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-server"></i> Production</a>
-            <a href="#slide15" class="mobile-nav-link" onclick="closeMobileNav()"><i class="fa-solid fa-paper-plane"></i> Contact</a>
-            <div class="mobile-divider"></div>
-            <a href="https://www.linkedin.com/in/sajjad-ahmad-275166278/" target="_blank" onclick="closeMobileNav()"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-            <a href="https://github.com/SajjadAhmad99" target="_blank" onclick="closeMobileNav()"><i class="fa-brands fa-github"></i> GitHub</a>
-            <a href="mailto:sajjaduop181@gmail.com" onclick="closeMobileNav()"><i class="fa-solid fa-envelope"></i> Email</a>
-        </div>
+    <div class="slide-nav-dots">
+        <a href="#slide1" class="dot-link active" title="Slide 1"></a>
+        <a href="#interactive-carousel" class="dot-link" title="Interactive Slides Carousel"></a>
+        <a href="#slide10" class="dot-link" title="Projects"></a>
+        <a href="#slide11" class="dot-link" title="Approach"></a>
+        <a href="#slide12" class="dot-link" title="Production"></a>
+        <a href="#slide13" class="dot-link" title="Why Me"></a>
+        <a href="#slide15" class="dot-link" title="Contact"></a>
     </div>
 
     <div class="presentation-wrapper">
@@ -1399,10 +1517,6 @@
                         <i class="fa-solid fa-envelope" style="color:var(--accent);font-size:18px;margin-bottom:4px;display:block;"></i>
                         <span style="font-size:11px;font-weight:600;">Email Me</span>
                     </a>
-                    <a href="http://localhost:8000/api/resume/download" id="resumeDownloadBtn" target="_blank" class="social-icon-btn">
-                        <i class="fa-solid fa-file-pdf" style="color:var(--accent);font-size:18px;margin-bottom:4px;display:block;"></i>
-                        <span style="font-size:11px;font-weight:600;">Download CV</span>
-                    </a>
                     <a href="https://x.com/FahhamG8078" target="_blank" class="social-icon-btn">
                         <i class="fa-brands fa-x-twitter" style="color:var(--accent);font-size:18px;margin-bottom:4px;display:block;"></i>
                         <span style="font-size:11px;font-weight:600;">Twitter / X</span>
@@ -1480,74 +1594,6 @@
         } else {
             setTheme('light');
         }
-
-        // =============================================
-        // MOBILE NAV
-        // =============================================
-        function toggleMobileNav() {
-            const overlay = document.getElementById('mobileNavOverlay');
-            const icon = document.getElementById('hamburgerIcon');
-            const isOpen = overlay.classList.contains('open');
-            if (isOpen) {
-                closeMobileNav();
-            } else {
-                overlay.classList.add('open');
-                icon.className = 'fa-solid fa-xmark';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-        function closeMobileNav() {
-            const overlay = document.getElementById('mobileNavOverlay');
-            const icon = document.getElementById('hamburgerIcon');
-            overlay.classList.remove('open');
-            icon.className = 'fa-solid fa-bars';
-            document.body.style.overflow = '';
-        }
-
-        // =============================================
-        // NAVBAR SCROLL SHADOW
-        // =============================================
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('mainNavbar');
-            if (window.scrollY > 20) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // =============================================
-        // ACTIVE NAV LINK TRACKING (IntersectionObserver)
-        // =============================================
-        const navSectionMap = [
-            { sectionId: 'slide1',              navId: 'nav-home'       },
-            { sectionId: 'interactive-carousel', navId: 'nav-about'     },
-            { sectionId: 'c-slide3',            navId: 'nav-skills'     },
-            { sectionId: 'slide10',             navId: 'nav-projects'   },
-            { sectionId: 'slide11',             navId: 'nav-approach'   },
-            { sectionId: 'slide12',             navId: 'nav-production' },
-            { sectionId: 'slide15',             navId: 'nav-contact'    },
-        ];
-
-        function setActiveNavLink(navId) {
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            const el = document.getElementById(navId);
-            if (el) el.classList.add('active');
-        }
-
-        const navLinkObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const map = navSectionMap.find(m => m.sectionId === entry.target.id);
-                    if (map) setActiveNavLink(map.navId);
-                }
-            });
-        }, { threshold: 0.25, rootMargin: '-60px 0px -60px 0px' });
-
-        navSectionMap.forEach(({ sectionId }) => {
-            const el = document.getElementById(sectionId);
-            if (el) navLinkObserver.observe(el);
-        });
 
         // =============================================
         // HORIZONTAL CAROUSEL
@@ -1666,5 +1712,195 @@
         }, { threshold: 0.3 });
         sections.forEach(s => navObserver.observe(s));
     </script>
+
+    <!-- ============================================= -->
+    <!-- CHATBOT: Floating Button + Chat Panel         -->
+    <!-- ============================================= -->
+
+    <!-- Floating Action Button -->
+    <button class="chatbot-fab" id="chatbotFab" onclick="toggleChatbot()" title="Chat with AI Assistant">
+        <i class="fa-solid fa-comment-dots"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <!-- Chat Panel -->
+    <div class="chatbot-panel" id="chatbotPanel">
+        <!-- Header -->
+        <div class="chatbot-header">
+            <div class="chatbot-header-avatar">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+            <div class="chatbot-header-info">
+                <div class="chatbot-header-name">AI Assistant</div>
+                <div class="chatbot-header-status">
+                    <span class="online-dot"></span> Online — Ready to help
+                </div>
+            </div>
+            <button class="chatbot-close-btn" onclick="toggleChatbot()" title="Close chat">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Messages Area -->
+        <div class="chatbot-messages" id="chatbotMessages">
+            <!-- Welcome message -->
+            <div class="chat-welcome" id="chatWelcome">
+                <div class="chat-welcome-icon">
+                    <i class="fa-solid fa-sparkles"></i>
+                </div>
+                <h4>Welcome! I'm Sajjad's AI Assistant</h4>
+                <p>Ask me anything about AI, machine learning, projects, or how I can help with your next idea.</p>
+                <div class="chat-suggestions">
+                    <span class="chat-suggestion-chip" onclick="sendSuggestion(this)">What can you do?</span>
+                    <span class="chat-suggestion-chip" onclick="sendSuggestion(this)">Tell me about RAG</span>
+                    <span class="chat-suggestion-chip" onclick="sendSuggestion(this)">Agentic AI explained</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chatbot-input-area">
+            <textarea class="chatbot-input" id="chatbotInput" placeholder="Type your message..." rows="1"
+                onkeydown="handleChatKeydown(event)"></textarea>
+            <button class="chatbot-send-btn" id="chatbotSendBtn" onclick="sendChatMessage()" title="Send message">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // CHATBOT CONTROLLER
+        // =============================================
+        const CHATBOT_API = `${API_BASE}/api/chatbot/chat/ask`;
+        let chatbotOpen = false;
+        let chatbotSending = false;
+
+        function toggleChatbot() {
+            chatbotOpen = !chatbotOpen;
+            document.getElementById('chatbotPanel').classList.toggle('open', chatbotOpen);
+            document.getElementById('chatbotFab').classList.toggle('open', chatbotOpen);
+            if (chatbotOpen) {
+                setTimeout(() => {
+                    document.getElementById('chatbotInput').focus();
+                }, 350);
+            }
+        }
+
+        function handleChatKeydown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        function sendSuggestion(chip) {
+            const text = chip.innerText;
+            document.getElementById('chatbotInput').value = text;
+            sendChatMessage();
+        }
+
+        function appendMessage(role, text) {
+            const messagesEl = document.getElementById('chatbotMessages');
+            // Hide welcome on first message
+            const welcome = document.getElementById('chatWelcome');
+            if (welcome) welcome.style.display = 'none';
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `chat-msg ${role}`;
+
+            const avatarIcon = role === 'bot' ? 'fa-robot' : 'fa-user';
+            msgDiv.innerHTML = `
+                <div class="chat-msg-avatar">
+                    <i class="fa-solid ${avatarIcon}"></i>
+                </div>
+                <div class="chat-msg-bubble">${escapeHtml(text)}</div>
+            `;
+            messagesEl.appendChild(msgDiv);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesEl = document.getElementById('chatbotMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="chat-msg-avatar" style="background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            `;
+            messagesEl.appendChild(typingDiv);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const el = document.getElementById('typingIndicator');
+            if (el) el.remove();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            // Preserve line breaks
+            return div.innerHTML.replace(/\n/g, '<br>');
+        }
+
+        async function sendChatMessage() {
+            if (chatbotSending) return;
+
+            const input = document.getElementById('chatbotInput');
+            const sendBtn = document.getElementById('chatbotSendBtn');
+            const question = input.value.trim();
+            if (!question) return;
+
+            // Add user message
+            appendMessage('user', question);
+            input.value = '';
+            input.style.height = 'auto';
+
+            // Disable input
+            chatbotSending = true;
+            sendBtn.disabled = true;
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            try {
+                const res = await fetch(CHATBOT_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: question })
+                });
+
+                removeTypingIndicator();
+
+                if (res.ok) {
+                    const data = await res.json();
+                    appendMessage('bot', data.answer || 'No response received.');
+                } else {
+                    const errData = await res.json().catch(() => ({}));
+                    appendMessage('bot', `⚠️ Error: ${errData.detail || 'Something went wrong. Please try again.'}`);
+                }
+            } catch (err) {
+                removeTypingIndicator();
+                appendMessage('bot', '⚠️ Could not connect to the AI backend. Please make sure the server is running.');
+            } finally {
+                chatbotSending = false;
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        // Auto-resize textarea
+        document.getElementById('chatbotInput').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 80) + 'px';
+        });
+    </script>
+
 </body>
 </html>

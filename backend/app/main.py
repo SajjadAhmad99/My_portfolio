@@ -1,4 +1,5 @@
 import os
+import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -10,6 +11,32 @@ from .routes import projects, contact, stats
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
+
+# ---------------------------------------------------------------------------
+# Multimodal-RAG Chatbot Integration
+# ---------------------------------------------------------------------------
+# Add multimodal-rag to Python path so its modules can be imported directly
+PORTFOLIO_ROOT_EARLY = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "..")
+)
+MULTIMODAL_RAG_DIR = os.path.join(PORTFOLIO_ROOT_EARLY, "multimodal-rag")
+
+if MULTIMODAL_RAG_DIR not in sys.path:
+    sys.path.insert(0, MULTIMODAL_RAG_DIR)
+
+# Load the multimodal-rag .env so API keys (GROK_API_KEY, etc.) are available
+from dotenv import load_dotenv
+multimodal_env = os.path.join(MULTIMODAL_RAG_DIR, ".env")
+if os.path.isfile(multimodal_env):
+    load_dotenv(multimodal_env, override=False)
+
+# Import only the chat router (voice, image, video excluded per requirements)
+try:
+    from api.chat import router as chatbot_router
+    CHATBOT_AVAILABLE = True
+except Exception as e:
+    CHATBOT_AVAILABLE = False
+    print(f"[WARNING] Could not import multimodal-rag chatbot: {e}")
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -31,6 +58,11 @@ app.add_middleware(
 app.include_router(projects.router)
 app.include_router(contact.router)
 app.include_router(stats.router)
+
+# Mount chatbot router at /chatbot and /api/chatbot (text-only, no voice/image/video)
+if CHATBOT_AVAILABLE:
+    app.include_router(chatbot_router, prefix="/chatbot", tags=["AI Chatbot"])
+    app.include_router(chatbot_router, prefix="/api/chatbot", tags=["AI Chatbot"])
 
 # Root directory of the portfolio project (two levels up from this file)
 PORTFOLIO_ROOT = os.path.abspath(
